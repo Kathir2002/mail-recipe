@@ -138,11 +138,9 @@ app.post("/edit-user", async (req, res) => {
       name: name,
       phoneNumber: phoneNumber,
       updatedAt: Date.now(),
-    });
-    currentUser.exec((err, result) => {
-      if (err) console.log(err);
-      return res.json({ success: "User updated successfully" });
-    });
+    })
+      .then((result) => res.json({ success: "User updated successfully" }))
+      .catch((err) => res.json({ err: err }))
   }
 })
 
@@ -314,11 +312,9 @@ app.post("/update-profile", async (req, res) => {
     let currentUser = userModel.findByIdAndUpdate(uId, {
       userImage: userImage,
       updatedAt: Date.now(),
-    });
-    currentUser.exec((err, result) => {
-      if (err) console.log(err);
-      return res.json({ success: "User profile updated successfully" });
-    });
+    })
+      .then((result) => res.json({ success: "User updated successfully" }))
+      .catch((err) => res.json({ err: err }))
   }
 })
 
