@@ -161,6 +161,24 @@ app.post("/edit-user", async (req, res) => {
   }
 })
 
+// change Password
+
+app.post("/change-password", async (req, res) => {
+  let { email, password } = req.body;
+  console.log(password);
+  if (!email || !password) {
+    return res.json({ message: "All filled must be required" });
+  } else {
+    password = bcrypt.hashSync(password, 10);
+    let currentUser = userModel.findOneAndUpdate({ email }, {
+      password: password,
+      updatedAt: Date.now(),
+    })
+      .then((result) => res.json({ success: "Password updated successfully" }))
+      .catch((err) => res.json({ err: "An error occured" }))
+  }
+})
+
 /* User Registration/Signup controller  */
 
 app.post("/signup", async (req, res) => {
