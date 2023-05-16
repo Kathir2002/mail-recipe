@@ -129,16 +129,21 @@ app.post("/get-user", async (req, res) => {
 
 app.get("/check-email", async (req, res) => {
   let { email } = req.body
-  let userCheck = userModel.findOne({ email: email })
-    .then((email) => {
-      if (email) {
-        res.json({ err: "Email already exists" })
-      }
-      else {
-        res.json({ success: true })
-      }
+  if (!email) {
+    res.json({ err: "All fields are required" })
+  }
+  else {
+    let userCheck = userModel.findOne({ email: email })
+      .then((email) => {
+        if (email) {
+          res.json({ err: "Email already exists" })
+        }
+        else {
+          res.json({ success: true })
+        }
 
-    })
+      })
+  }
 
 })
 
