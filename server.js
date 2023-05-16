@@ -88,7 +88,6 @@ app.post("/send-otp", async (req, res) => {
     </head>
     <body>
       <h1>OTP Verification</h1>
-      <p>Thank you for signing up for our Flavor Finder App. To complete your registration, please use the following One-Time Password:</p>
       <div class="code">[${otp}]</div>
       <p>This code will expire in 5 minutes. If you did not sign up for this service, please ignore this email.</p>
     </body>
@@ -101,7 +100,6 @@ app.post("/send-otp", async (req, res) => {
       console.log(error);
       res.json(`Error ${error}`)
     } else {
-      // console.log('Email sent: ' + info.response);
       res.json(otp)
     }
   });
@@ -127,7 +125,7 @@ app.post("/get-user", async (req, res) => {
   }
 })
 
-app.get("/check-email", async (req, res) => {
+app.post("/check-email", async (req, res) => {
   let { email } = req.body
   if (!email) {
     res.json({ err: "All fields are required" })
@@ -296,7 +294,7 @@ app.post("/signup", async (req, res) => {
                   }
                 });
                 return res.json({
-                  success: "Account create successfully. Please login",
+                  success: "Account create successfully!",
                   data
                 });
               })
