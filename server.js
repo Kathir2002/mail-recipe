@@ -111,7 +111,6 @@ app.post("/send-otp", async (req, res) => {
 
 app.post("/get-user", async (req, res) => {
   let { uId } = req.body;
-  console.log(uId, "uId")
   if (!uId) {
     return res.json({ error: "All fields are required!" });
   } else {
@@ -126,6 +125,21 @@ app.post("/get-user", async (req, res) => {
       console.log(err);
     }
   }
+})
+
+app.get("/check-email", async (req, res) => {
+  let { email } = req.body
+  let userCheck = userModel.findOne({ email: email })
+    .then((email) => {
+      if (email) {
+        res.json({ err: "Email already exists" })
+      }
+      else {
+        res.json({ success: true })
+      }
+
+    })
+
 })
 
 app.post("/edit-user", async (req, res) => {
