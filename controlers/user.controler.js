@@ -357,7 +357,7 @@ const userControler = {
         } catch (err) {
             console.log(err);
         }
-    }
+    },
 }
 
 module.exports = userControler
