@@ -39,6 +39,17 @@ const recipeController = {
                 })
             }
         }
+    },
+    getRecipe: async (req, res) => {
+        const { rId } = req.body;
+        if (!rId) {
+            return res.json({ error: "Please add all the required fields" })
+        }
+        else {
+            let recipes = recipeModel.findById(rId).select("fav name timeToEat cusine category image time quantityForServe nutrientInfo videoId ingredients")
+                .then((data) => res.json({ data }))
+                .catch((err) => res.json({ err }))
+        }
     }
 }
 

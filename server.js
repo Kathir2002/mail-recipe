@@ -37,6 +37,8 @@ app.post("/add-recipes", recipeController.addRecipe)
 
 app.post("/add-ingredients", recipeController.addIngredients)
 
+app.get("/get-recipes", recipeController.getRecipe)
+
 mongoose.connect(process.env.DATABASE, {
   useNewUrlParser: true,
   useUnifiedTopology: true
